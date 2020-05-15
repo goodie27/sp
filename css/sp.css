@@ -3,6 +3,11 @@
 
   background-color: #d6e7f1;
 }
+.sub {
+  background-color: #d6e7f1;
+  border-radius: 13px;
+  width: 117px;
+}
 .btn-shop {
   width: 213px;
   border-radius: 9px;
