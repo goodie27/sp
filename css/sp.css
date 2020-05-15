@@ -1,0 +1,39 @@
+.sec-container {
+  height: 323px;
+
+  background-color: #d6e7f1;
+}
+.btn-shop {
+  width: 213px;
+  border-radius: 9px;
+  height: 40px;
+  background-color: #fe7318;
+  color: white;
+  font-size: 14px;
+  font-family: -webkit-body;
+  font-weight: bold;
+}
+.text {
+  font-size: 22px;
+  /* width: 1018px; */
+  font-family: monospace;
+}
+.name {
+  color: #218fe0;
+}
+.footer {
+  text-align: center;
+}
+.wrap {
+  display: inline-block;
+  text-align: center;
+  width: 90vw;
+  margin-left: 68px;
+}
+.line {
+  width: 740px;
+  color: gray;
+  height: 2px;
+  /* display: inline; */
+  text-align: center;
+}
