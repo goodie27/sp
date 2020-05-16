@@ -1,0 +1,259 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  setTimeout(function(){
+  var v_p = s_adbadobestock,
+	event1_flag = true,
+	autosuggest_rank;
+s_adbadobestock.events = "";
+s_adbadobestock.pageName = SL.getVar("adbadobenonacdc_pageName");
+var v_p = s_adbadobestock,
+	event1_flag = true,
+	autosuggest_rank;
+//datalayer internal search mapping and all events mapping
+
+if (typeof _satellite.getQueryParam('load_type') !== "undefined" && _satellite.getQueryParam('load_type')) {
+	var id_compare = _satellite.getQueryParam('load_type');
+
+	if (id_compare === "find_similar") {
+		event1_flag = false;
+		v_p.events = v_p.events ? v_p.events + ",event150" : "event150";
+		v_p.pageName = s_adbadobestock.prop3 + ":searchResult:findsimilarresult";
+	}
+
+	if (id_compare === "see more") {
+		event1_flag = false;
+		v_p.events = v_p.events ? v_p.events + ",event149" : "event149";
+		v_p.pageName = s_adbadobestock.prop3 + ":searchResult:seemoreresult";
+	}
+}
+
+if (typeof digitalData !== 'undefined' && typeof digitalData.pageInfo !== 'undefined' && typeof digitalData.pageInfo.load_type !== 'undefined') {
+
+	if(digitalData.pageInfo.promooffer && digitalData.pageInfo.promooffer.toLowerCase() !== "na") {
+		v_p.events = v_p.events ? v_p.events + ",event195" : "event195";
+		}
+	if(digitalData.pageInfo.carousel && digitalData.pageInfo.carousel.toLowerCase() !== "na") {
+		v_p.events = v_p.events ? v_p.events + ",event194" : "event194";
+		}
+	if (digitalData.pageInfo.load_type === "find_similar") {
+		event1_flag = false;
+		v_p.events = v_p.events ? v_p.events + ",event150" : "event150";
+		v_p.pageName = s_adbadobestock.prop3 + ":searchResult:findsimilarresult";
+	}
+	if (digitalData.pageInfo.load_type === "see more") {
+		event1_flag = false;
+		v_p.events = v_p.events ? v_p.events + ",event149" : "event149";
+		v_p.pageName = s_adbadobestock.prop3 + ":searchResult:seemoreresult";
+	}
+}
+//if (_satellite.getQueryParam("safe_search") == "1") v_p.events = v_p.events ? v_p.events + ",event144" : "event144";
+if (typeof digitalData !== 'undefined') {
+	if (typeof digitalData.pageInfo !== 'undefined') {
+		var d_pg = digitalData.pageInfo;
+		v_p.eVar2 = d_pg.content_type;
+		v_p.eVar11 = d_pg.category;
+		v_p.eVar15 = d_pg.content_id;
+		v_p.eVar89 = d_pg.author;
+		v_p.prop69 = d_pg.title;
+		v_p.prop67 = d_pg.selected_tab;
+		v_p.eVar194 = d_pg.carousel;
+    v_p.eVar207 = d_pg.load_type;
+		v_p.eVar226 = d_pg.tab;
+		v_p.eVar227 = d_pg.tab_display;
+		v_p.eVar228 = d_pg.file_type;
+		if (d_pg.load_type == "category")
+			v_p.events = v_p.events ? v_p.events + ",event160" : "event160";
+		if (d_pg.tab_navigate)
+			v_p.events = v_p.events ? v_p.events + ",event144" : "event144";
+		v_p.eVar237 = d_pg.search_theme;
+		v_p.prop57 = d_pg.url;
+		v_p.eVar209 = "D=c57";
+		v_p.prop58 = d_pg.previousUrl;
+		v_p.eVar210 = "D=c58";
+if (d_pg.load_type == "filter")
+			v_p.events = v_p.events ? v_p.events + ",event239" : "event239";
+	}
+	if (typeof digitalData.internalInfo !== 'undefined') {
+		v_p.eVar139 = digitalData.internalInfo.filter;
+	}
+	if (typeof digitalData.user !== 'undefined') {
+		var d_us = digitalData.user;
+		v_p.eVar199 = d_us.qetraffic;
+		v_p.eVar248 = d_us.remaining_quota;
+		v_p.eVar238 = d_us.remaining_credit;
+		v_p.eVar200 = d_us.team;
+		v_p.prop52 = d_us.cc_member_status;
+		v_p.eVar111 = "D=c52";
+		v_p.prop61 = d_us.login_type;
+		v_p.eVar119 = "D=c61";
+		v_p.eVar46 = d_us.stockactivestatus;
+		v_p.prop59 = d_us.region;
+		v_p.eVar201 = "D=c59";
+		v_p.prop56 = d_us.date_stamp;
+		v_p.eVar208 = "D=c56";
+		//v_p.eVar200 = d_us.team;
+		v_p.eVar70 = d_us.feature_flag;
+		v_p.eVar170 = d_us.feature_flag1;
+		v_p.eVar171 = d_us.feature_flag2;
+		v_p.eVar172 = d_us.feature_flag3;
+		v_p.eVar250 = d_us.member_status.toString();
+	}
+
+	if (typeof digitalData.product !== 'undefined') {
+		v_p.eVar206 = digitalData.product.row + "|" + digitalData.product.column;
+	}
+
+	if (typeof digitalData.search !== 'undefined' && digitalData.search.results_counts !== 'undefined') {
+		var d_s = digitalData.search;
+		if (d_s.search_type && digitalData.search.search_type.indexOf("visual") != -1) {
+			v_p.events = v_p.events ? v_p.events + ",event111" : "event111";
+		}
+        if (digitalData.eventInfo.eventLabel == "searchresult" && d_pg.load_type == "search" && digitalData.eventInfo.eventType == "pageload") {
+            if (d_s.search_type == "usertyped" || d_s.search_type == "autocorrect" || d_s.search_type == "autosuggest" || d_s.search_type == "recentsearch") {
+                if (d_s.results_counts.total_search_results >= 0) {
+                    s_adbadobestock.events = s_adbadobestock.events ? s_adbadobestock.events + ",event501" : "event501";
+                }
+                if (d_s.results_counts.total_search_results == 0) {
+                    s_adbadobestock.events = s_adbadobestock.events ? s_adbadobestock.events + ",event502" : "event502";
+                }
+            }
+        }
+      if (digitalData.eventInfo.eventLabel == "searchresult" && digitalData.eventInfo.eventType == "pageload" && (d_s.search_type == "visual external" || d_s.search_type == "visual internal" || (d_pg.load_type == "visual" && d_s.token == "uploaded image"))) {
+        s_adbadobestock.events = s_adbadobestock.events ? s_adbadobestock.events + ",event503" : "event503";
+      }
+
+    var search_no = $(".search-result-cell").length;
+
+		function getQueryVariable(variable) {
+			var query = digitalData.pageInfo.url;
+			var vars = query.split("&");
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split("=");
+				if (pair[0] == variable) {
+					return pair[1];
+				}
+			}
+			return ("1");
+		}
+		var srchPageNum = getQueryVariable("search_page");
+		v_p.prop68 = srchPageNum;
+		if (srchPageNum !== "1") {
+			event1_flag = false;
+			v_p.events = v_p.events ? v_p.events + ",event148" : "event148";
+			if ($('.alert--aibanner').length) {
+				v_p.events = v_p.events ? v_p.events + ",event170" : "event170";
+				v_p.eVar145 = "aibanner";
+			}
+		}
+		if (d_s.results_counts["total_search_results"] == "0") {
+			event1_flag = false;
+			v_p.events = v_p.events ? v_p.events + ",event2" : "event2";
+		}
+		if (_satellite._readCookie("s_stov") !== d_s.keyword && event1_flag && (digitalData.search.keyword)) {
+			v_p.events = v_p.events ? v_p.events + ",event1" : "event1";
+		}
+
+		v_p.events = v_p.events ? v_p.events + ",event25=" + search_no : "event25=" + search_no;
+
+		v_p.prop27 = d_s.results_counts["3d"];
+		//if (v_p.prop27)
+		v_p.events = v_p.events ? v_p.events + ",event126=" + v_p.prop27 : "event126=" + v_p.prop27;
+
+		v_p.prop28 = d_s.results_counts["core_images"];
+		//if (v_p.prop28)
+		v_p.events = v_p.events ? v_p.events + ",event127=" + v_p.prop28 : "event127=" + v_p.prop28;
+
+		v_p.prop29 = d_s.results_counts["editorial_photos"];
+		//if (v_p.prop29)
+		v_p.events = v_p.events ? v_p.events + ",event128=" + v_p.prop29 : "event128=" + v_p.prop29;
+
+		v_p.prop31 = d_s.results_counts["editorial_videos"];
+		//if (v_p.prop31)
+		v_p.events = v_p.events ? v_p.events + ",event129=" + v_p.prop31 : "event129=" + v_p.prop31;
+
+		v_p.prop32 = d_s.results_counts["free"];
+		//if (v_p.prop32)
+		v_p.events = v_p.events ? v_p.events + ",event130=" + v_p.prop32 : "event130=" + v_p.prop32;
+
+		v_p.prop33 = d_s.results_counts["illustrations"];
+		//if (v_p.prop33)
+		v_p.events = v_p.events ? v_p.events + ",event131=" + v_p.prop33 : "event131=" + v_p.prop33;
+
+
+		v_p.prop34 = d_s.results_counts["photos"];
+		//if (v_p.prop34)
+		v_p.events = v_p.events ? v_p.events + ",event132=" + v_p.prop34 : "event132=" + v_p.prop34;
+
+		v_p.prop37 = d_s.results_counts["premium_3d"];
+		//if (v_p.prop37)
+		v_p.events = v_p.events ? v_p.events + ",event133=" + v_p.prop37 : "event133=" + v_p.prop37;
+
+		v_p.prop38 = d_s.results_counts["premium_photos"];
+		//if (v_p.prop38)
+		v_p.events = v_p.events ? v_p.events + ",event134=" + v_p.prop38 : "event134=" + v_p.prop38;
+
+
+		v_p.prop39 = d_s.results_counts["premium_template"];
+		//if (v_p.prop39)
+		v_p.events = v_p.events ? v_p.events + ",event135=" + v_p.prop39 : "event135=" + v_p.prop39;
+
+
+		v_p.prop40 = d_s.results_counts["template"];
+		//if (v_p.prop40)
+		v_p.events = v_p.events ? v_p.events + ",event136=" + v_p.prop40 : "event136=" + v_p.prop40;
+
+		v_p.prop41 = d_s.results_counts["vectors"];
+		//if (v_p.prop41)
+		v_p.events = v_p.events ? v_p.events + ",event137=" + v_p.prop41 : "event137=" + v_p.prop41;
+
+		v_p.prop50 = d_s.results_counts["video_4k"];
+		//if (v_p.prop50)
+		v_p.events = v_p.events ? v_p.events + ",event138=" + v_p.prop50 : "event138=" + v_p.prop50;
+
+		v_p.prop51 = d_s.results_counts["video_hd"];
+		//if (v_p.prop51)
+		v_p.events = v_p.events ? v_p.events + ",event139=" + v_p.prop51 : "event139=" + v_p.prop51;
+		var obj = d_s.results_counts;
+		var arr = [];
+		for (var key in obj) {
+			if (key != "total_search_results") {
+				if (obj.hasOwnProperty(key)) {
+					arr.push(key + '=' + obj[key]);
+				}
+			}
+		};
+		v_p.eVar246 = arr.join('|');
+		v_p.prop7 = v_p.eVar10 = d_s.results_counts.total_search_results;
+		v_p.events = v_p.events ? v_p.events + ",event125=" + v_p.prop7 : "event125=" + v_p.prop7;
+		v_p.prop6 = v_p.eVar3 = d_s.keyword;
+		/* if(v_p.eVar3 ==_satellite._readCookie("s_stov")) {
+		v_p.events = v_p.events ? v_p.events + ",event1": "event1";
+		}*/
+		v_p.eVar135 = d_s.filter_pickers;
+		v_p.eVar203 = d_s.token;
+		v_p.eVar145 = d_s.welcome_banner;
+		v_p.eVar234 = d_s.did_you_really_mean_autocorrect;
+		if (v_p.eVar234)
+			v_p.events = v_p.events ? v_p.events + ",event252=" + v_p.eVar234 : "event252=" + v_p.eVar234;
+		if (typeof d_s.autosuggest_rank == "undefined" || d_s.autosuggest_rank == null) {
+			autosuggest_rank = "No Value";
+		} else autosuggest_rank = d_s.autosuggest_rank;
+		if (typeof d_s.usertyped_keyword == "undefined" || d_s.usertyped_keyword == "" || d_s.usertyped_keyword == null) {
+			d_s.usertyped_keyword = "No Value";
+		}
+		v_p.eVar116 = d_s.search_type + "|" + autosuggest_rank + "|" + d_s.usertyped_keyword;
+
+		v_p.prop7 = d_s.results_counts["total_search_results"];
+		v_p.eVar10 = "D=c7";
+	}
+}
+v_p.eVar32 = v_p.pageName;
+
+//scode version
+v_p.eVar62 = s_adbadobestock.version;
+v_p.prop75 = s_adbadobestock.version;
+//v_p.prop71 = SL.getVar("adbadobenonacdc_prop38");
+//Plans page
+s_adbadobestock.t();
+window.stockPageview = true;
+}, 400);
+});
