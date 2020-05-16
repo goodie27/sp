@@ -1,6 +1,4 @@
 .sec-container {
-  height: 323px;
-
   background-color: #d6e7f1;
 }
 .sub {
@@ -23,6 +21,9 @@
   /* width: 1018px; */
   font-family: monospace;
 }
+hr {
+  width: 50%;
+}
 .name {
   color: #218fe0;
 }
@@ -30,15 +31,14 @@
   text-align: center;
 }
 .wrap {
-  display: inline-block;
   text-align: center;
-  width: 90vw;
-  margin-left: 68px;
+  width: 50vw;
+
+  margin: auto;
 }
-.line {
-  width: 740px;
-  color: gray;
-  height: 2px;
-  /* display: inline; */
-  text-align: center;
+span {
+  border: 0.5px solid gray;
+  width: 10px;
+
+  position: relative;
 }
