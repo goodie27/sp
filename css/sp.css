@@ -1,5 +1,6 @@
 .sec-container {
   background-color: #d6e7f1;
+  padding: 30px;
 }
 .sub {
   background-color: #d6e7f1;
@@ -17,15 +18,14 @@
   font-weight: bold;
 }
 .text {
-  font-size: 20px;
-  /* width: 1018px; */
-  font-family: monospace;
+  font-size: 14px;
 }
 hr {
   width: 50%;
 }
 .name {
   color: #218fe0;
+  font-size: 1.5rem;
 }
 .footer {
   text-align: center;
@@ -39,6 +39,15 @@ hr {
 span {
   border: 0.5px solid gray;
   width: 10px;
-
   position: relative;
+}
+.socials {
+  display: flex;
+  justify-content: space-evenly;
+  width: 34%;
+  margin: 12px auto;
+}
+.welcome {
+  font-size: 2rem;
+  font-weight: bold;
 }
